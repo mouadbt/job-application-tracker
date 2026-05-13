@@ -5,11 +5,63 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>job-application-tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <h1 class="bg-green-400">
-    Hello world!
-  </h1>
+    <header class="p-8 flex flex-col items-center">
+      <div class="flex w-full items-center justify-between">
+        <h1 class="heading-xl">Job Applications</h1>
+        <button type="button" class="btn-icon" aria-label="Toggle theme">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+            class="size-4"
+          >
+            <path
+              d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"
+            ></path>
+          </svg>
+          <span class="sr-only">Toggle theme</span>
+        </button>
+      </div>
+
+      <div class="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-6">
+        <button class="btn-primary">Add New Application</button>
+        <button class="btn-secondary">How does it work</button>
+      </div>
+    </header>
+    <section>
+      <input
+        type="text"
+        class="input"
+      />
+      <p>
+        how people describe<!-- -->
+        <span class="font-medium text-foreground">tinypad</span> after switching
+        from browser bookmarks
+      </p>
+      <div class="card w-[22rem] sm:w-[24rem]">
+        <div class="card-content">
+          <div class="flex flex-col">
+            <p class="text-label">maria r.</p>
+            <p class="text-description">freelance writer</p>
+          </div>
+          <p class="text-body">
+            the group-based layout is simple and surprisingly powerful. i
+            stopped losing references between projects.
+          </p>
+        </div>
+      </div>
+    </section>
     <div id="app"></div>
     <script type="module" src="/src/home.js"></script>
   </body>
