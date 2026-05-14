@@ -1,6 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap');
 @import "tailwindcss";
 
+:root {
+  --svg-gray: #e6e6e6;
+  --svg-dark-purple: #3f3d56;
+  --svg-white: #f2f2f2;
+  --svg-skin: #ffb8b8;
+  --svg-deep-purple: #2f2e41;
+  --svg-black: #000000;
+}
+
 @theme {
   --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -43,56 +52,56 @@
   }
 
   body {
-    @apply text-foreground bg-background;
+    @apply text-muted-foreground text-sm leading-relaxed;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-semibold tracking-tight text-primary;
-  }
-
-  p {
-    @apply leading-relaxed;
   }
 }
 
 @layer components {
-  /* Shared Interaction States (Focus, Disabled, Invalid) */
-  .btn-primary,
-  .btn-secondary,
-  .btn-icon,
-  .input {
-    @apply outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40;
-  }
 
-  /* Shared Button Base (no custom class used in @apply as requested) */
+  .input,
   .btn-primary,
   .btn-secondary,
   .btn-icon {
-    @apply group/button inline-flex shrink-0 items-center justify-center border bg-clip-padding text-sm font-medium whitespace-nowrap transition-all select-none active:not-aria-[haspopup]:translate-y-px [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;
+    @apply outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 rounded-3xl
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-icon {
+    @apply flex items-center justify-center border text-sm font-medium transition-all select-none active:not-aria-[haspopup]:translate-y-px aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4;
   }
 
   .btn-primary {
-    @apply border-transparent bg-primary text-primary-foreground hover:bg-primary/80 gap-1.5 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 h-8 rounded-lg px-2.5 sm:h-11 sm:px-4;
+    @apply border-transparent bg-primary text-primary-foreground hover:bg-primary/80 gap-1.5 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 h-8 px-2.5 sm:h-11 sm:px-4;
   }
 
   .btn-secondary {
-    @apply border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground gap-1.5 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 h-8 rounded-lg px-2.5 sm:h-11 sm:px-4;
+    @apply border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground gap-1.5 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 h-8 px-2.5 sm:h-11 sm:px-4;
   }
 
   .btn-icon {
-    @apply border-border bg-background text-foreground hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:bg-transparent dark:hover:bg-input/30 size-8 rounded-full;
+    @apply border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground size-8 rounded-full;
   }
 
   .input {
-    @apply h-9 w-full min-w-0 rounded-3xl border border-transparent bg-input/50 px-3 py-1 text-base transition-[color,box-shadow,background-color] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:cursor-not-allowed md:text-sm;
+    @apply h-9 w-full min-w-0 rounded-3xl border border-transparent bg-input/50 px-3 py-1 text-base transition-all file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:cursor-not-allowed md:text-sm;
   }
 
-  .heading-xl {
+  .heading {
     @apply text-xl font-semibold tracking-tight text-primary;
   }
 
   .card {
-    @apply rounded-2xl border border-border/80 bg-secondary/55 dark:bg-secondary/35;
+    @apply rounded-2xl border border-border/80 bg-secondary/55;
   }
 
   .card-content {
@@ -100,7 +109,7 @@
   }
 
   .text-label {
-    @apply text-sm font-semibold text-foreground;
+    @apply font-semibold text-foreground;
   }
 
   .text-description {
@@ -108,6 +117,104 @@
   }
 
   .text-body {
-    @apply text-sm leading-relaxed text-foreground/90;
+    @apply text-foreground/90;
+  }
+
+
+
+  /* Table component */
+  .table-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: auto;
+  }
+
+  .table {
+    width: 100%;
+    caption-side: bottom;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .table-thead tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .table-tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background-color 100ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    &[aria-selected="true"] {
+      background-color: var(--muted);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: color-mix(in oklch, var(--muted) 50%, transparent);
+      }
+    }
+  }
+
+  .table-th {
+    height: 2.5rem;
+    padding: 0 calc(var(--spacing) * 4);
+    text-align: left;
+    vertical-align: middle;
+    font-weight: 500;
+    color: var(--muted-foreground);
+    white-space: nowrap;
+
+    &:has([type=checkbox]) {
+      padding-right: 0;
+      width: 1%;
+    }
+
+    &[align=right] {
+      text-align: right;
+    }
+
+    &[align=center] {
+      text-align: center;
+    }
+  }
+
+  .table-td {
+    padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
+    vertical-align: middle;
+
+    &:has([type=checkbox]) {
+      padding-right: 0;
+      width: 1%;
+    }
+
+    &[align=right] {
+      text-align: right;
+    }
+
+    &[align=center] {
+      text-align: center;
+    }
+  }
+
+  .table-caption {
+    margin-top: calc(var(--spacing) * 4);
+    padding: var(--spacing);
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    text-align: center;
+  }
+
+  .table-footer {
+    border-top: 1px solid var(--border);
+    background-color: color-mix(in oklch, var(--muted), transparent 60%);
+
+    & .table-td {
+      color: var(--foreground);
+      font-weight: 500;
+    }
   }
 }

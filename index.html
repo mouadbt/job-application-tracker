@@ -14,55 +14,127 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <header class="p-8 flex flex-col items-center">
-      <div class="flex w-full items-center justify-between">
-        <h1 class="heading-xl">Job Applications</h1>
-        <button type="button" class="btn-icon" aria-label="Toggle theme">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1em"
-            height="1em"
-            fill="currentColor"
-            viewBox="0 0 256 256"
-            class="size-4"
-          >
-            <path
-              d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"
-            ></path>
-          </svg>
-          <span class="sr-only">Toggle theme</span>
-        </button>
-      </div>
-
-      <div class="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-6">
-        <button class="btn-primary">Add New Application</button>
-        <button class="btn-secondary">How does it work</button>
-      </div>
+    <header class="p-8 flex items-center justify-between">
+      <h1 class="heading">Job Applications</h1>
+      <button
+        type="button"
+        class="btn-icon svg-wrapper"
+        aria-label="Toggle theme"
+        data-target="new"
+      >
+        <span class="sr-only">Add new job application</span>
+      </button>
     </header>
-    <section>
-      <input
-        type="text"
-        class="input"
-      />
-      <p>
-        how people describe<!-- -->
-        <span class="font-medium text-foreground">tinypad</span> after switching
-        from browser bookmarks
-      </p>
-      <div class="card w-[22rem] sm:w-[24rem]">
-        <div class="card-content">
-          <div class="flex flex-col">
-            <p class="text-label">maria r.</p>
-            <p class="text-description">freelance writer</p>
+    <main class="p-8 pt-4">
+      <section class="flex gap-4 items-stretch h-min">
+        <div
+          data-target="vector"
+          class="svg-wrapper min-w-1 rounded-xl w-full border border-border flex items-center justify-between pr-6 gap-4"
+        >
+          <div class="space-y-4 flex flex-col p-6 pr-0">
+            <span
+              class="text-muted-foreground truncate text-sm"
+              id="author-el"
+            ></span>
+            <span class="heading mt-1 text-" id="quote-el"></span>
           </div>
-          <p class="text-body">
-            the group-based layout is simple and surprisingly powerful. i
-            stopped losing references between projects.
-          </p>
         </div>
-      </div>
-    </section>
-    <div id="app"></div>
+        <div
+          class="bg-card text-card-foreground flex flex-col rounded-xl space-y-4 p-6 border border-border"
+        >
+          <span class="text-muted-foreground truncate text-sm"
+            >Total Applications</span
+          >
+          <span class="heading mt-1 text-3xl">1</span>
+        </div>
+        <div
+          class="bg-card text-card-foreground flex flex-col rounded-xl space-y-4 p-6 border border-border"
+        >
+          <div class="flex items-start justify-between space-x-2">
+            <span class="text-muted-foreground truncate text-sm"
+              >Monthly recurring revenue</span
+            ><span
+              class="text-sm font-medium text-emerald-700 dark:text-emerald-500"
+              >+6.1%</span
+            >
+          </div>
+          <dd class="heading mt-1 text-3xl">$34.1K</dd>
+        </div>
+        <div
+          class="bg-card text-card-foreground flex flex-col rounded-xl space-y-4 p-6 border border-border"
+        >
+          <div class="flex items-start justify-between space-x-2">
+            <span class="text-muted-foreground truncate text-sm"
+              >Monthly recurring revenue</span
+            ><span
+              class="text-sm font-medium text-emerald-700 dark:text-emerald-500"
+              >+6.1%</span
+            >
+          </div>
+          <dd class="heading mt-1 text-3xl">$34.1K</dd>
+        </div>
+      </section>
+      <section
+        class="table-wrapper mt-12"
+      >
+        <table class="table">
+          <caption class="table-caption">
+            
+          </caption>
+          <thead class="table-thead">
+            <tr>
+              <th class="table-th">Project Name</th>
+              <th class="table-th">Category</th>
+              <th class="table-th">Status</th>
+              <th class="table-th" align="right">Due Date</th>
+            </tr>
+          </thead>
+          <tbody class="table-tbody">
+            <tr>
+              <td class="table-td">Website Redesign</td>
+              <td class="table-td">Development</td>
+              <td class="table-td">
+                <span style="color: var(--success, #10b981)">Completed</span>
+              </td>
+              <td class="table-td" align="right">May 12, 2024</td>
+            </tr>
+            <tr>
+              <td class="table-td">Mobile Application</td>
+              <td class="table-td">Design</td>
+              <td class="table-td">
+                <span style="color: var(--success, #10b981)">In Progress</span>
+              </td>
+              <td class="table-td" align="right">Jun 04, 2024</td>
+            </tr>
+            <tr>
+              <td class="table-td">User Interviews</td>
+              <td class="table-td">Research</td>
+              <td class="table-td">
+                <span style="color: var(--muted-foreground)">On Hold</span>
+              </td>
+              <td class="table-td" align="right">Jun 20, 2024</td>
+            </tr>
+            <tr>
+              <td class="table-td">Content Audit</td>
+              <td class="table-td">Marketing</td>
+              <td class="table-td">
+                <span style="color: var(--destructive)">Cancelled</span>
+              </td>
+              <td class="table-td" align="right">—</td>
+            </tr>
+          </tbody>
+          <tfoot class="table-footer">
+            <tr>
+              <td class="table-td" colspan="3">Total active projects</td>
+              <td class="table-td" align="right">3</td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+    </main>
+    <div id="new-application"></div>
+    <div id="application-details"></div>
+    <footer></footer>
     <script type="module" src="/src/home.js"></script>
   </body>
 </html>
