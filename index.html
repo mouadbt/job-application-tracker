@@ -15,8 +15,12 @@
   </head>
   <body>
     <header class="p-8 flex items-center justify-between">
-      <h1 class="heading">Job Applications</h1>
+      <div>
+        <h1 class="heading">Job Applications</h1>
+        <hr class="bg-border h-[2px] w-12" />
+      </div>
       <button
+        title="Add new job application"
         type="button"
         class="btn-icon svg-wrapper"
         aria-label="Toggle theme"
@@ -74,62 +78,141 @@
           <dd class="heading mt-1 text-3xl">$34.1K</dd>
         </div>
       </section>
-      <section
-        class="table-wrapper mt-12"
-      >
-        <table class="table">
-          <caption class="table-caption">
-            
-          </caption>
-          <thead class="table-thead">
-            <tr>
-              <th class="table-th">Project Name</th>
-              <th class="table-th">Category</th>
-              <th class="table-th">Status</th>
-              <th class="table-th" align="right">Due Date</th>
-            </tr>
-          </thead>
-          <tbody class="table-tbody">
-            <tr>
-              <td class="table-td">Website Redesign</td>
-              <td class="table-td">Development</td>
-              <td class="table-td">
-                <span style="color: var(--success, #10b981)">Completed</span>
-              </td>
-              <td class="table-td" align="right">May 12, 2024</td>
-            </tr>
-            <tr>
-              <td class="table-td">Mobile Application</td>
-              <td class="table-td">Design</td>
-              <td class="table-td">
-                <span style="color: var(--success, #10b981)">In Progress</span>
-              </td>
-              <td class="table-td" align="right">Jun 04, 2024</td>
-            </tr>
-            <tr>
-              <td class="table-td">User Interviews</td>
-              <td class="table-td">Research</td>
-              <td class="table-td">
-                <span style="color: var(--muted-foreground)">On Hold</span>
-              </td>
-              <td class="table-td" align="right">Jun 20, 2024</td>
-            </tr>
-            <tr>
-              <td class="table-td">Content Audit</td>
-              <td class="table-td">Marketing</td>
-              <td class="table-td">
-                <span style="color: var(--destructive)">Cancelled</span>
-              </td>
-              <td class="table-td" align="right">—</td>
-            </tr>
-          </tbody>
-          <tfoot class="table-footer">
-            <tr>
-              <td class="table-td" colspan="3">Total active projects</td>
-              <td class="table-td" align="right">3</td>
-            </tr>
-          </tfoot>
-        </table>
+
+      <!-- table -->
+      <section class="mt-12 space-y-6">
+        <div class="flex items-center justify-between">
+          <h2 class="heading">Recent Applications</h2>
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-muted-foreground">Showing 2 results</span>
+          </div>
+        </div>
+
+        <div class="table-wrapper rounded-2xl border border-border">
+          <table class="table">
+            <thead class="table-thead bg-muted/30 border-b border-border">
+              <tr>
+                <th class="table-th py-4">Company</th>
+                <th class="table-th">Position</th>
+                <th class="table-th">Status</th>
+                <th class="table-th">Link</th>
+                <th class="table-th">Notes</th>
+                <th class="table-th text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="table-tbody">
+              <tr class="group cursor-pointer border-b border-border">
+                <td class="table-td py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="flex size-9 items-center justify-center rounded-xl bg-primary/5 text-primary font-bold border border-primary/10"
+                    >
+                      G
+                    </div>
+                    <div>
+                      <div class="font-semibold text-foreground">Google</div>
+                      <div
+                        class="text-[10px] text-muted-foreground uppercase tracking-wider"
+                      >
+                        Mountain View, CA
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="table-td">
+                  <span class="font-medium text-foreground/90"
+                    >Senior Frontend Engineer</span
+                  >
+                </td>
+                <td class="table-td">
+                  <span
+                    class="inline-flex items-center rounded-full bg-emerald-100/80 px-2.5 py-0.5 text-xs font-medium text-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-400 ring-1 ring-inset ring-emerald-600/10"
+                  >
+                    Interviewing
+                  </span>
+                </td>
+                <td class="table-td">
+                  <a
+                    href="#"
+                    class="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 group/link"
+                  >
+                    View Post
+                    <span
+                      data-target="external-link"
+                      class="svg-wrapper size-3 opacity-0 group-hover/link:opacity-100 -translate-x-1 group-hover/link:translate-x-0 transition-all [&_svg]:size-full"
+                    ></span>
+                  </a>
+                </td>
+                <td class="table-td max-w-[240px]">
+                  <p class="truncate text-muted-foreground">
+                    Referred by John. Completed technical round, waiting for
+                    system design.
+                  </p>
+                </td>
+                <td class="table-td text-right">
+                  <button
+                    class="btn-icon ml-auto opacity-0 group-hover:opacity-100 transition-opacity svg-wrapper"
+                    data-target="more-vertical"
+                  ></button>
+                </td>
+              </tr>
+              <tr class="group cursor-pointer">
+                <td class="table-td py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="flex size-9 items-center justify-center rounded-xl bg-primary/5 text-primary font-bold border border-primary/10"
+                    >
+                      M
+                    </div>
+                    <div>
+                      <div class="font-semibold text-foreground">Meta</div>
+                      <div
+                        class="text-[10px] text-muted-foreground uppercase tracking-wider"
+                      >
+                        Menlo Park, CA
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="table-td">
+                  <span class="font-medium text-foreground/90"
+                    >Software Engineer II</span
+                  >
+                </td>
+                <td class="table-td">
+                  <span
+                    class="inline-flex items-center rounded-full bg-blue-100/80 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-950/30 dark:text-blue-400 ring-1 ring-inset ring-blue-600/10"
+                  >
+                    Applied
+                  </span>
+                </td>
+                <td class="table-td">
+                  <a
+                    href="#"
+                    class="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 group/link"
+                  >
+                    View Post
+                    <span
+                      data-target="external-link"
+                      class="svg-wrapper size-3 opacity-0 group-hover/link:opacity-100 -translate-x-1 group-hover/link:translate-x-0 transition-all [&_svg]:size-full"
+                    ></span>
+                  </a>
+                </td>
+                <td class="table-td max-w-[240px]">
+                  <p class="truncate text-muted-foreground">
+                    Cold applied via LinkedIn. Recruiter screening next Tuesday.
+                  </p>
+                </td>
+                <td class="table-td text-right">
+                  <button
+                    class="btn-icon ml-auto opacity-0 group-hover:opacity-100 transition-opacity svg-wrapper"
+                    data-target="more-vertical"
+                  ></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </main>
     <div id="new-application"></div>

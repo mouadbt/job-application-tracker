@@ -13,7 +13,7 @@ const init = () => {
     handleRenderSvg();
 
     // Render random Quote
-    handleRenderQuote();
+    // handleRenderQuote();
 }
 
 init();
@@ -34,6 +34,17 @@ function handleRenderSvg() {
         }
     });
 
+}
+
+// Render Quotes 
+const renderQuotes = (author,quote) => {
+
+    const authorEl = document.querySelector("#author-el");
+    const quoteEl = document.querySelector("#quote-el");
+    const quote2El = document.querySelector(".table-caption");
+    authorEl.textContent = data?.author;
+    quoteEl.textContent = data?.quote;
+    quote2El.textContent = data?.quote;
 }
 
 async function handleRenderQuote() {
