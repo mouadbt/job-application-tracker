@@ -90,9 +90,9 @@
 
         <div class="table-wrapper rounded-2xl border border-border">
           <table class="table">
-            <thead class="table-thead bg-muted/30 border-b border-border">
+            <thead class="table-thead">
               <tr>
-                <th class="table-th py-4">Company</th>
+                <th class="table-th">Company</th>
                 <th class="table-th">Position</th>
                 <th class="table-th">Status</th>
                 <th class="table-th">Link</th>
@@ -101,8 +101,8 @@
               </tr>
             </thead>
             <tbody class="table-tbody">
-              <tr class="group cursor-pointer border-b border-border">
-                <td class="table-td py-4">
+              <tr class="group">
+                <td class="table-td">
                   <div class="flex items-center gap-3">
                     <div
                       class="flex size-9 items-center justify-center rounded-xl bg-primary/5 text-primary font-bold border border-primary/10"
@@ -143,7 +143,7 @@
                     ></span>
                   </a>
                 </td>
-                <td class="table-td max-w-[240px]">
+                <td class="table-td max-w-60">
                   <p class="truncate text-muted-foreground">
                     Referred by John. Completed technical round, waiting for
                     system design.
@@ -151,61 +151,7 @@
                 </td>
                 <td class="table-td text-right">
                   <button
-                    class="btn-icon ml-auto opacity-0 group-hover:opacity-100 transition-opacity svg-wrapper"
-                    data-target="more-vertical"
-                  ></button>
-                </td>
-              </tr>
-              <tr class="group cursor-pointer">
-                <td class="table-td py-4">
-                  <div class="flex items-center gap-3">
-                    <div
-                      class="flex size-9 items-center justify-center rounded-xl bg-primary/5 text-primary font-bold border border-primary/10"
-                    >
-                      M
-                    </div>
-                    <div>
-                      <div class="font-semibold text-foreground">Meta</div>
-                      <div
-                        class="text-[10px] text-muted-foreground uppercase tracking-wider"
-                      >
-                        Menlo Park, CA
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="table-td">
-                  <span class="font-medium text-foreground/90"
-                    >Software Engineer II</span
-                  >
-                </td>
-                <td class="table-td">
-                  <span
-                    class="inline-flex items-center rounded-full bg-blue-100/80 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-950/30 dark:text-blue-400 ring-1 ring-inset ring-blue-600/10"
-                  >
-                    Applied
-                  </span>
-                </td>
-                <td class="table-td">
-                  <a
-                    href="#"
-                    class="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 group/link"
-                  >
-                    View Post
-                    <span
-                      data-target="external-link"
-                      class="svg-wrapper size-3 opacity-0 group-hover/link:opacity-100 -translate-x-1 group-hover/link:translate-x-0 transition-all [&_svg]:size-full"
-                    ></span>
-                  </a>
-                </td>
-                <td class="table-td max-w-[240px]">
-                  <p class="truncate text-muted-foreground">
-                    Cold applied via LinkedIn. Recruiter screening next Tuesday.
-                  </p>
-                </td>
-                <td class="table-td text-right">
-                  <button
-                    class="btn-icon ml-auto opacity-0 group-hover:opacity-100 transition-opacity svg-wrapper"
+                    class="action-btn btn-icon ml-auto opacity-0 group-hover:opacity-100 transition-opacity svg-wrapper"
                     data-target="more-vertical"
                   ></button>
                 </td>

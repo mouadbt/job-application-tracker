@@ -7,7 +7,7 @@ export const fetchData = async (endpoint, parser = 'json') => {
 
 export function setStorage(key, data) {
     try {
-        localStorage.setItem(key, JSON.stringify(data));
+        sessionStorage.setItem(key, JSON.stringify(data));
     } catch (err) {
         console.error("Failed to save to localStorage", err);
     }
@@ -15,7 +15,7 @@ export function setStorage(key, data) {
 
 export function getStorage(key) {
     try {
-        const value = localStorage.getItem(key);
+        const value = sessionStorage.getItem(key);
 
         if (value === null) return null;
 

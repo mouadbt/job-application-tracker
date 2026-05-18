@@ -1,7 +1,11 @@
 import './style.css';
 import { supabase } from './supabase';
 import { AddJobModal } from './components/AddJobModal';
-import { fetchData } from './utils';
+import { fetchData, getStorage, setStorage } from './utils';
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+const authorEl = document.querySelector("#author-el");
+const quoteEl = document.querySelector("#quote-el");
 
 // Initialize modal logic
 new AddJobModal();
@@ -13,14 +17,14 @@ const init = () => {
     handleRenderSvg();
 
     // Render random Quote
-    // handleRenderQuote();
+    handleRenderQuote();
 }
 
 init();
 
 
 function handleRenderSvg() {
-    const svgWrappers = document.querySelectorAll('.svg-wrapper');
+    const svgWrappers = document.querySelectorAll('.svg-wrapper, .link-external-icon, .table-action-btn, .add-job-btn, .hero-card');
     svgWrappers.forEach(async (wrapper) => {
         const svgTarget = wrapper.dataset.target;
         try {
@@ -33,30 +37,48 @@ function handleRenderSvg() {
             console.error('Render SVG failed:', err);
         }
     });
-
 }
 
 // Render Quotes 
-const renderQuotes = (author,quote) => {
-
-    const authorEl = document.querySelector("#author-el");
-    const quoteEl = document.querySelector("#quote-el");
-    const quote2El = document.querySelector(".table-caption");
-    authorEl.textContent = data?.author;
-    quoteEl.textContent = data?.quote;
-    quote2El.textContent = data?.quote;
+function renderQuotes(author, quote) {
+    if (!authorEl || !quoteEl) return;
+    authorEl.textContent = author;
+    quoteEl.textContent = quote;
 }
 
+// Handle rendering quotes
 async function handleRenderQuote() {
+    const storedQuote = getStorage("Quote:v1");
+    let author = '';
+    let quote = '';
     try {
-        const data = await fetchData('https://random-quotes-freeapi.vercel.app/api/random');
-        const authorEl = document.querySelector("#author-el");
-        const quoteEl = document.querySelector("#quote-el");
-        const quote2El = document.querySelector(".table-caption");
-        authorEl.textContent = data?.author;
-        quoteEl.textContent = data?.quote;
-        quote2El.textContent = data?.quote;
+        // decide operation ( fetch or load )
+        const fetchNewQuote =
+            !storedQuote ||
+            !storedQuote.savedAt ||
+            Date.now() - storedQuote.savedAt >= DAY_MS;
+
+        // fetch or load
+        if (fetchNewQuote) {
+            const data = await fetchData('https://random-quotes-freeapi.vercel.app/api/random');
+
+            if (!data?.author || !data?.quote) {
+                throw new Error("Invalid quote data");
+            }
+
+            author = data.author;
+            quote = data.quote;
+
+            setStorage("Quote:v1", { author, quote, savedAt: Date.now() });
+        } else {
+            author = storedQuote?.author;
+            quote = storedQuote?.quote;
+        }
+
+        // Render
+        renderQuotes(author, quote);
     } catch (err) {
+        renderQuotes('Sam Levenson', 'Don’t watch the clock; do what it does. Keep going.');
         console.error('Render Quote Failed:', err);
     }
 }
