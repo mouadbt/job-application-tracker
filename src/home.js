@@ -1,14 +1,16 @@
 import './style.css';
 import { supabase } from './supabase';
-import { AddJobModal } from './components/AddJobModal';
+import { initAddJobModal } from './components/AddJobModal';
 import { fetchData, getStorage, setStorage } from './utils';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const authorEl = document.querySelector("#author-el");
 const quoteEl = document.querySelector("#quote-el");
+const openApplicationModalBtn = document.querySelector("#open-application-modal-btn");
+const applicationModalForm = document.querySelector("#application-modal-form");
 
 // Initialize modal logic
-new AddJobModal();
+initAddJobModal();
 
 
 const init = () => {
@@ -22,7 +24,7 @@ const init = () => {
 
 init();
 
-
+// handle rendering svgs in the page
 function handleRenderSvg() {
     const svgWrappers = document.querySelectorAll('.svg-wrapper, .link-external-icon, .table-action-btn, .add-job-btn, .hero-card');
     svgWrappers.forEach(async (wrapper) => {

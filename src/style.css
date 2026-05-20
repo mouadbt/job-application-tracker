@@ -8,6 +8,14 @@
   --svg-skin: #ffb8b8;
   --svg-deep-purple: #2f2e41;
   --svg-black: #000000;
+
+    --muted: oklch(0.940 0.003 286.350);
+    --popover: oklch(1.000 0.000 0.000);
+    --popover-foreground: oklch(0.200 0.004 286.099);
+    --sidebar: oklch(0.985 0.002 286.350);
+    --radius: 0.25rem;
+    --border: oklch(0.850 0.004 286.099);
+    --spacing: 0.25rem;
 }
 
 @theme {
@@ -171,4 +179,31 @@
   .table-thead {
     @apply bg-muted/30 border-b border-border;
   }
+
+  .table button:focus-visible {
+    @apply opacity-100!
+  }
+
+  .table .badge {
+    @apply inline-flex items-center rounded-full bg-emerald-100/25! px-2.5 py-0.5 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/10
+  }
+
+  .table .sub-text {
+    @apply text-xs uppercase tracking-wider
+  }
+
+  .table .c-logo {
+    @apply flex size-9 items-center justify-center rounded-xl bg-primary/5 text-primary font-bold border border-primary/10
+  }
+
+  .table .link-icon {
+    @apply size-3 opacity-0 -translate-x-1 transition-all [&_svg]:size-full
+  }
+
+  .table .action-btn {
+    @apply ml-auto opacity-0 transition-opacity
+  }
+
+
+
 }
