@@ -25,3 +25,21 @@ export function getStorage(key) {
         return null;
     }
 }
+
+// handle rendering svgs in the page
+export function loadSvgIcons() {
+    const svgWrappers = document.querySelectorAll('.svg-wrapper');
+    svgWrappers.forEach(async (wrapper) => {
+        const svgTarget = wrapper.dataset.target;
+        if (!svgTarget) return;
+        try {
+            const svgText = await fetchData(`/icons/${svgTarget}.svg`, 'text');
+            const svg = new DOMParser()
+                .parseFromString(svgText, 'image/svg+xml')
+                .documentElement;
+            wrapper.appendChild(svg);
+        } catch (err) {
+            console.error('Render SVG failed:', err);
+        }
+    });
+}
