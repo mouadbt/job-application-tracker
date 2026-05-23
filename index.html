@@ -148,10 +148,13 @@
     >
       <header class="flex items-center justify-between p-6">
         <div class="grid gap-1.5">
-          <h4 class="text-lg font-semibold leading-none text-foreground">
+          <h4
+            class="text-lg font-semibold leading-none text-foreground"
+            id="dialog-title"
+          >
             New Application
           </h4>
-          <p class="text-sm text-muted-foreground">
+          <p class="text-sm text-muted-foreground" id="dialog-description">
             Add a new job application to your tracker.
           </p>
         </div>
@@ -160,14 +163,19 @@
           class="btn-icon size-8 -mt-2 -mr-2 svg-wrapper"
           id="close-application-modal"
           data-target="x"
-        >
-        </button>
+        ></button>
       </header>
 
+      <!-- View Application details -->
+      <section data-section="view" hidden>...</section>
+
+      <!-- Application form -->
       <form id="application-modal-form" class="flex flex-col">
-        <div class="grid gap-4 p-6 pt-0">
+        <div class="grid gap-4 p-6 pt-" 0>
           <div class="grid gap-2">
-            <label for="company" class="text-sm font-medium">Company Name</label>
+            <label for="company" class="text-sm font-medium"
+              >Company Name</label
+            >
             <input
               type="text"
               id="company"

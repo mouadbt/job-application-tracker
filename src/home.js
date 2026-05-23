@@ -1,6 +1,6 @@
 import './style.css';
 // import { supabase } from './supabase';
-import { initAddJobModal } from './components/AddJobModal';
+import { initJobModal } from './components/ApplicationModal';
 import { fetchData, getStorage, setStorage, loadSvgIcons } from './utils';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -12,7 +12,7 @@ const FALLBACK_QUOTE = {
 };
 
 // Initialize modal logic
-initAddJobModal();
+initJobModal();
 
 
 async function init() {
@@ -71,4 +71,3 @@ async function renderDailyQuote() {
         console.error('Render Quote Failed:', err);
     }
 }
-
