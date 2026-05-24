@@ -120,7 +120,7 @@
                     View Post
                     <span
                       data-target="external-link"
-                      class="svg-wrapper group-hover/link:opacity-100 group-hover/link:translate-x-0 link-icon"
+                      class="svg-wrapper group-hover/link:opacity-100 group-hover/link:translate-x-0 link-icon group-focus/link:opacity-100 group-focus/link:translate-x-0"
                     ></span>
                   </a>
                 </td>
@@ -130,11 +130,21 @@
                     system design.
                   </p>
                 </td>
-                <td class="table-td text-right">
+                <td class="table-td text-right relative">
                   <button
-                    class="action-btn btn-icon svg-wrapper group-hover:opacity-100"
+                    class="actions-btn btn-icon svg-wrapper group-hover:opacity-100"
+                    data-id="4"
                     data-target="more-vertical"
                   ></button>
+                  <div
+                    data-id="4"
+                    hidden
+                    class="actions-dropdown fixed mt-1 right-8! rounded-2xl bg-background p-4 flex flex-col border border-border"
+                  >
+                    <button class="btn-secondary">Option 1</button>
+                    <button class="btn-secondary">Option 2</button>
+                    <button class="btn-secondary">Option 3</button>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -166,11 +176,26 @@
         ></button>
       </header>
 
+      <!-- Show Loading indecator -->
+      <section
+        class="flex justify-center min-h-72 items-center gap-4 flex-col"
+        data-section="load"
+        id="loader"
+      >
+        <div
+          class="relative block w-[130px] h-[4px] rounded-[30px] bg-primary/20 overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:h-full before:w-0 before:rounded-[30px] before:bg-primary before:animate-[moving_1s_ease-in-out_infinite]"
+        ></div>
+        <small class="text-primary/50">Loading content...</small>
+      </section>
       <!-- View Application details -->
       <section data-section="view" hidden>...</section>
 
       <!-- Application form -->
-      <form id="application-modal-form" class="flex flex-col">
+      <form
+        id="application-modal-form"
+        data-section="form"
+        class="flex flex-col"
+      >
         <div class="grid gap-4 p-6 pt-" 0>
           <div class="grid gap-2">
             <label for="company" class="text-sm font-medium"

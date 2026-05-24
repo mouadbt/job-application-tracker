@@ -2,6 +2,7 @@ import './style.css';
 // import { supabase } from './supabase';
 import { initJobModal } from './components/ApplicationModal';
 import { fetchData, getStorage, setStorage, loadSvgIcons } from './utils';
+import { initDropDown } from './components/DropDown';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const authorEl = document.querySelector("#author-el");
@@ -11,24 +12,27 @@ const FALLBACK_QUOTE = {
     quote: 'Don’t watch the clock...'
 };
 
-// Initialize modal logic
-initJobModal();
-
 
 async function init() {
+
+    // Initialize modal logic
+    initJobModal();
+
+    // Initialize modal logic
+    initDropDown();
 
     // Render svg to page
     loadSvgIcons();
 
     // Render random Quote
     await renderDailyQuote();
+
 }
 
 init();
 
 // Render Quotes 
-function renderQuote({author, quote}) {
-    console.log(author, quote);
+function renderQuote({ author, quote }) {
     if (!authorEl || !quoteEl) return;
     authorEl.textContent = author;
     quoteEl.textContent = quote;
@@ -65,7 +69,7 @@ async function renderDailyQuote() {
         }
 
         // Render
-        renderQuote({author, quote});
+        renderQuote({ author, quote });
     } catch (err) {
         renderQuote(FALLBACK_QUOTE);
         console.error('Render Quote Failed:', err);

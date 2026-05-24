@@ -1,3 +1,5 @@
+import { fetchData } from "../utils";
+
 const modal = document.querySelector("#application-modal");
 const form = document.querySelector("#application-modal-form");
 const openBtn = document.querySelector("#open-application-modal-btn");
@@ -5,6 +7,7 @@ const closeBtn = document.querySelector("#close-application-modal");
 const cancelBtn = document.querySelector("#cancel-application-modal");
 const titleEl = document.querySelector("#dialog-title");
 const descEl = document.querySelector("#dialog-description");
+const loaderEl = document.querySelector("#loader");
 
 const sections = {
     view: document.querySelector('[data-section="view"]'),
@@ -16,11 +19,12 @@ function hideAllSections() {
         el.hidden = true;
     });
 }
-``
-export function initJobModal() {
-    if (!modal || !openBtn) return;
 
-    openBtn.addEventListener("click", open);
+export function initJobModal() {
+    if (!modal) return;
+
+    if (openBtn) { openBtn.addEventListener("click", () => open('form', null)) };
+
     closeBtn?.addEventListener("click", close);
     cancelBtn?.addEventListener("click", close);
 
@@ -43,9 +47,32 @@ export function initJobModal() {
     });
 }
 
-function open() {
+async function open(target, data) {
+    openModel();
+    if (!data) loaderEl.hidden = true;
+    sections[target].hidden = false;
+    let applicationData = {};
+    if (data) {
+        applicationData = await fetchApplicationData();
+    }
+    if (applicationData) {
+        console.log(applicationData);
+    }
+}
+
+function openModel() {
+    hideAllSections();
     modal.showModal();
     document.body.style.overflow = "hidden";
+}
+
+async function fetchApplicationData() {
+    try {
+        const res = fetchData('https://catfact.ninja/fact');
+        return await res.json();
+    } catch (err) {
+        console.error("Error fetching applicatio data: ", err);
+    }
 }
 
 function close() {

@@ -9,13 +9,13 @@
   --svg-deep-purple: #2f2e41;
   --svg-black: #000000;
 
-    --muted: oklch(0.940 0.003 286.350);
-    --popover: oklch(1.000 0.000 0.000);
-    --popover-foreground: oklch(0.200 0.004 286.099);
-    --sidebar: oklch(0.985 0.002 286.350);
-    --radius: 0.25rem;
-    --border: oklch(0.850 0.004 286.099);
-    --spacing: 0.25rem;
+  --muted: oklch(0.940 0.003 286.350);
+  --popover: oklch(1.000 0.000 0.000);
+  --popover-foreground: oklch(0.200 0.004 286.099);
+  --sidebar: oklch(0.985 0.002 286.350);
+  --radius: 0.25rem;
+  --border: oklch(0.850 0.004 286.099);
+  --spacing: 0.25rem;
 }
 
 @theme {
@@ -78,22 +78,45 @@
   .input,
   .btn-primary,
   .btn-secondary,
+  .btn-icon,
+  a {
+    @apply outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 transition-all
+  }
+
+  a {
+    @apply rounded-md
+  }
+
+  .input,
+  .btn-primary,
+  .btn-secondary,
   .btn-icon {
-    @apply outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 rounded-3xl
+    @apply rounded-3xl
+  }
+
+  .input,
+  .btn-primary,
+  .btn-secondary {
+    @apply border-transparent
   }
 
   .btn-primary,
   .btn-secondary,
   .btn-icon {
-    @apply flex items-center justify-center border text-sm font-medium transition-all select-none active:not-aria-[haspopup]:translate-y-px aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4;
+    @apply flex items-center justify-center border text-sm font-medium select-none active:not-aria-[haspopup]:translate-y-px aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    @apply gap-1.5 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 h-8 px-2.5 sm:h-11 sm:px-4;
   }
 
   .btn-primary {
-    @apply border-transparent bg-primary text-primary-foreground hover:bg-primary/80 gap-1.5 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 h-8 px-2.5 sm:h-11 sm:px-4;
+    @apply bg-primary text-primary-foreground hover:bg-primary/80;
   }
 
   .btn-secondary {
-    @apply border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground gap-1.5 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 h-8 px-2.5 sm:h-11 sm:px-4;
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground;
   }
 
   .btn-icon {
@@ -101,7 +124,7 @@
   }
 
   .input {
-    @apply h-9 w-full min-w-0 rounded-3xl border border-transparent bg-input/50 px-3 py-1 text-base transition-all file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:cursor-not-allowed md:text-sm;
+    @apply h-9 w-full min-w-0 bg-input/50 px-3 py-1 text-base file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:cursor-not-allowed md:text-sm;
   }
 
   .heading {
@@ -143,8 +166,6 @@
     border-collapse: collapse;
     font-size: 0.875rem;
   }
-
-
 
   .table-th {
     height: 2.5rem;
@@ -200,10 +221,20 @@
     @apply size-3 opacity-0 -translate-x-1 transition-all [&_svg]:size-full
   }
 
-  .table .action-btn {
-    @apply ml-auto opacity-0 transition-opacity
+  .table .actions-btn {
+    @apply ml-auto! opacity-0 transition-opacity;
   }
 
+}
 
+@keyframes moving {
+  50% {
+    width: 100%;
+  }
 
+  100% {
+    width: 0;
+    right: 0;
+    left: unset;
+  }
 }
