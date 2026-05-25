@@ -23,7 +23,7 @@ function hideAllSections() {
 export function initJobModal() {
     if (!modal) return;
 
-    if (openBtn) { openBtn.addEventListener("click", () => open('form', null)) };
+    if (openBtn) { openBtn.addEventListener("click", () => open('form', null, 'New Application', 'Add a new job application to your tracker.')) };
 
     closeBtn?.addEventListener("click", close);
     cancelBtn?.addEventListener("click", close);
@@ -47,8 +47,8 @@ export function initJobModal() {
     });
 }
 
-async function open(target, data) {
-    openModel();
+async function open(target, data, title, desc) {
+    openModel(title, desc);
     if (!data) loaderEl.hidden = true;
     sections[target].hidden = false;
     let applicationData = {};
@@ -60,10 +60,12 @@ async function open(target, data) {
     }
 }
 
-function openModel() {
+function openModel(title, desc) {
     hideAllSections();
     modal.showModal();
     document.body.style.overflow = "hidden";
+    titleEl.textContent=title;
+    descEl.textContent=desc;
 }
 
 async function fetchApplicationData() {

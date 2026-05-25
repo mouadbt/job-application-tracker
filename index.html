@@ -139,11 +139,14 @@
                   <div
                     data-id="4"
                     hidden
-                    class="actions-dropdown fixed mt-1 right-8! rounded-2xl bg-background p-4 flex flex-col border border-border"
+                    class="actions-dropdown fixed mt-1 right-8! rounded-3xl bg-background p-1 flex flex-col border border-border"
                   >
-                    <button class="btn-secondary">Option 1</button>
-                    <button class="btn-secondary">Option 2</button>
-                    <button class="btn-secondary">Option 3</button>
+                    <button class="btn-ghost svg-wrapper" data-target="pen">
+                      Edit
+                    </button>
+                    <button class="btn-ghost svg-wrapper" data-target="trash">
+                      Delete
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -156,17 +159,13 @@
       id="application-modal"
       class="m-auto w-[calc(100%-2rem)] max-w-[425px] rounded-2xl border border-border bg-card p-0 shadow-lg backdrop:bg-black/20 backdrop:backdrop-blur-sm open:flex flex-col"
     >
-      <header class="flex items-center justify-between p-6">
-        <div class="grid gap-1.5">
+      <header class="flex items-center justify-between p-6 pb-0">
+        <div class="flex flex-col gap-1.5">
           <h4
             class="text-lg font-semibold leading-none text-foreground"
             id="dialog-title"
-          >
-            New Application
-          </h4>
-          <p class="text-sm text-muted-foreground" id="dialog-description">
-            Add a new job application to your tracker.
-          </p>
+          ></h4>
+          <p class="text-sm text-muted-foreground" id="dialog-description"></p>
         </div>
         <button
           type="button"
@@ -258,7 +257,7 @@
           </div>
         </div>
         <footer
-          class="flex items-center justify-end gap-3 border-t border-border bg-muted/30 p-6"
+          class="flex items-center justify-end gap-3 border-t border-border p-4 px-6"
         >
           <button
             type="button"
