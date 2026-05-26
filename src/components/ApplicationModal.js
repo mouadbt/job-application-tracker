@@ -2,17 +2,20 @@ import { fetchData } from "../utils";
 
 const modal = document.querySelector("#application-modal");
 const form = document.querySelector("#application-modal-form");
-const openBtn = document.querySelector("#open-application-modal-btn");
+const newBtn = document.querySelector("#new-application-modal-btn");
 const closeBtn = document.querySelector("#close-application-modal");
 const cancelBtn = document.querySelector("#cancel-application-modal");
 const titleEl = document.querySelector("#dialog-title");
 const descEl = document.querySelector("#dialog-description");
 const loaderEl = document.querySelector("#loader");
+const editBtns = document.querySelectorAll(".edit-application");
 
 const sections = {
     view: document.querySelector('[data-section="view"]'),
     form: document.querySelector('[data-section="form"]'),
 };
+
+const formData = new FormData();
 
 function hideAllSections() {
     Object.values(sections).forEach(el => {
@@ -23,7 +26,17 @@ function hideAllSections() {
 export function initJobModal() {
     if (!modal) return;
 
-    if (openBtn) { openBtn.addEventListener("click", () => open('form', null, 'New Application', 'Add a new job application to your tracker.')) };
+    if (newBtn) { newBtn.addEventListener("click", () => open('form', null, 'New Application', 'Add a new job application to your tracker.')) };
+
+    editBtns.forEach((el) => {
+        // el.addEventListener("click", () => open('form', null, 'Edit Application', 'Add a new job application to your tracker.'));
+
+        el.addEventListener("click", () => {
+            const isEmpty = [...formData.entries()].length === 0;
+            console.log(formData,isEmpty);
+        });
+
+    });
 
     closeBtn?.addEventListener("click", close);
     cancelBtn?.addEventListener("click", close);
@@ -64,8 +77,8 @@ function openModel(title, desc) {
     hideAllSections();
     modal.showModal();
     document.body.style.overflow = "hidden";
-    titleEl.textContent=title;
-    descEl.textContent=desc;
+    titleEl.textContent = title;
+    descEl.textContent = desc;
 }
 
 async function fetchApplicationData() {
@@ -84,7 +97,6 @@ function close() {
 }
 
 function handleSubmit() {
-    const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     console.log("Form data:", data);
 

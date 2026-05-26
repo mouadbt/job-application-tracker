@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Hero View Transition</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #f4f1ea;
+        --text: #0f0f0f;
+        --muted: #6e6e73;
+        --card: rgba(255, 255, 255, 0.4);
+        --border: rgba(0, 0, 0, 0.1);
+        --accent: #ff4d00;
+        --font-mono: "SF Mono", "Monaco", "Inconsolata", monospace;
+      }
+
+      .dark {
+        --bg: #090909;
+        --text: #f5f5f5;
+        --muted: #86868b;
+        --card: rgba(255, 255, 255, 0.03);
+        --border: rgba(255, 255, 255, 0.1);
+      }
+
+      html {
+        color-scheme: light dark;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        transition: background 0.3s, color 0.3s;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* View Transition Logic - DO NOT TOUCH */
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none;
+        mix-blend-mode: normal;
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        isolation: isolate;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 40px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .logo {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .nav-meta {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .theme-toggle {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: var(--card);
+        backdrop-filter: blur(10px);
+        color: var(--text);
+        cursor: pointer;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      .theme-toggle:hover {
+        background: var(--text);
+        color: var(--bg);
+        transform: rotate(180deg);
+      }
+
+      .main-grid {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .grid-col {
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .grid-col:first-child {
+        border-right: 1px solid var(--border);
+      }
+
+      .title-wrap h1 {
+        font-size: clamp(4rem, 12vw, 12rem);
+        line-height: 0.82;
+        font-weight: 900;
+        letter-spacing: -0.05em;
+        text-transform: uppercase;
+        margin-left: -0.05em;
+      }
+
+      .title-wrap h1 span {
+        display: block;
+        color: transparent;
+        -webkit-text-stroke: 1px var(--text);
+        opacity: 0.4;
+      }
+
+      .info-box {
+        max-width: 360px;
+      }
+
+      .label {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        margin-bottom: 24px;
+        display: block;
+        letter-spacing: 0.1em;
+      }
+
+      .description {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+        color: var(--text);
+      }
+
+      .footer-strip {
+        padding: 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: end;
+      }
+
+      .glass-card {
+        padding: 24px;
+        border-radius: 4px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(20px);
+        max-width: 300px;
+      }
+
+      .glass-card p {
+        color: var(--muted);
+        line-height: 1.5;
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+      }
+
+      .cta {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        color: var(--text);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: gap 0.3s;
+      }
+
+      .cta:hover {
+        gap: 16px;
+      }
+
+      .stats {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        text-align: right;
+        color: var(--muted);
+      }
+
+      .big-number {
+        font-size: 20vw;
+        font-weight: 900;
+        letter-spacing: -0.08em;
+        opacity: 0.03;
+        position: absolute;
+        bottom: -5vw;
+        right: -2vw;
+        pointer-events: none;
+        line-height: 1;
+      }
+
+      .blur {
+        position: absolute;
+        width: 80vw;
+        height: 80vw;
+        background: radial-gradient(
+          circle,
+          rgba(120, 120, 255, 0.1),
+          transparent 70%
+        );
+        top: -20vw;
+        right: -20vw;
+        z-index: -1;
+        filter: blur(100px);
+      }
+
+      @media (max-width: 1024px) {
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+        .grid-col:first-child {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+        }
+        .footer-strip {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .stats {
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="blur"></div>
+
+      <nav class="nav">
+        <div class="logo">VOID® — 2026</div>
+        <div class="nav-meta">Stockholm / London</div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+          ◐
+        </button>
+      </nav>
+
+      <main class="main-grid">
+        <div class="grid-col">
+          <div class="title-wrap">
+            <h1>
+              FUTURE <br />
+              NEEDS <br />
+              <span>LESS</span> <br />
+              NOISE
+            </h1>
+          </div>
+        </div>
+
+        <div class="grid-col">
+          <div class="info-box">
+            <span class="label">Manifesto</span>
+            <p class="description">
+              Experimental interface concept exploring the intersection of
+              brutalist typography and cinematic motion. We design for the quiet
+              moments in a digital world that never sleeps.
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer-strip">
+        <div class="glass-card">
+          <p>
+            Typography-first layout with intentional whitespace and editorial
+            visual rhythm.
+          </p>
+          <a href="#" class="cta">
+            Explore Concept
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </a>
+        </div>
+
+        <div></div>
+
+        <div class="stats">
+          <span class="label">Project Index</span>
+          <p>49.3400° N, 3.8400° E</p>
+          <p>VO-ID_REL_01.26</p>
+        </div>
+      </footer>
+
+      <div class="big-number">26</div>
+    </section>
+
+    <script>
+      const toggle = document.getElementById("themeToggle");
+
+      toggle.addEventListener("click", async () => {
+        if (!document.startViewTransition) {
+          document.documentElement.classList.toggle("dark");
+          return;
+        }
+
+        const transition = document.startViewTransition(() => {
+          document.documentElement.classList.toggle("dark");
+        });
+
+        await transition.ready;
+
+        document.documentElement.animate(
+          {
+            clipPath: ["inset(0 0 100% 0)", "inset(0 0 0% 0)"],
+          },
+          {
+            duration: 900,
+            easing: "cubic-bezier(.87,0,.13,1)",
+            pseudoElement: "::view-transition-new(root)",
+          },
+        );
+      });
+    </script>
+  </body>
+</html>
