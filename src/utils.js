@@ -3,7 +3,14 @@ export const fetchData = async (endpoint, parser = 'json') => {
     if (!res.ok) throw new Error(`Fetch failed: ${endpoint} (${res.status})`);
     return res[parser]();
 };
-
+export function fetchDataTest() {
+  return new Promise((resolve) => {
+    // Simulate data fetching with a delay
+    setTimeout(() => {
+      resolve("Data fetched successfully");
+    }, 2000);
+  });
+}
 
 export function setStorage(key, data) {
     try {

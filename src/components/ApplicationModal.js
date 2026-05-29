@@ -1,4 +1,4 @@
-import { fetchData } from "../utils";
+import { fetchData, fetchDataTest } from "../utils";
 
 const modal = document.querySelector("#application-modal");
 const form = document.querySelector("#application-modal-form");
@@ -13,9 +13,7 @@ const editBtns = document.querySelectorAll(".edit-application");
 const sections = {
     view: document.querySelector('[data-section="view"]'),
     form: document.querySelector('[data-section="form"]'),
-};
-
-const formData = new FormData();
+}
 
 function hideAllSections() {
     Object.values(sections).forEach(el => {
@@ -26,16 +24,11 @@ function hideAllSections() {
 export function initJobModal() {
     if (!modal) return;
 
-    if (newBtn) { newBtn.addEventListener("click", () => open('form', null, 'New Application', 'Add a new job application to your tracker.')) };
+    if (newBtn) { newBtn.addEventListener("click", () => open('form', 'new', 'New Application', 'Add a new job application to your tracker.')) };
 
     editBtns.forEach((el) => {
-        // el.addEventListener("click", () => open('form', null, 'Edit Application', 'Add a new job application to your tracker.'));
-
-        el.addEventListener("click", () => {
-            const isEmpty = [...formData.entries()].length === 0;
-            console.log(formData,isEmpty);
-        });
-
+        const id = el.dataset.id;
+        el.addEventListener("click", () => open('form', 'edit', 'Edit Application', 'Update job application informations.', id));
     });
 
     closeBtn?.addEventListener("click", close);
@@ -60,43 +53,65 @@ export function initJobModal() {
     });
 }
 
-async function open(target, data, title, desc) {
-    openModel(title, desc);
-    if (!data) loaderEl.hidden = true;
-    sections[target].hidden = false;
+async function open(target, action, title, desc, id = null) {
+    openModel(title, desc, target);
+    if (action === 'new') loaderEl.hidden = true;
     let applicationData = {};
-    if (data) {
-        applicationData = await fetchApplicationData();
+    if (action != 'new') {
+        applicationData = await fetchApplicationData(id);
     }
     if (applicationData) {
-        console.log(applicationData);
+        hadnleRenderingApplicationData(applicationData, action);
     }
 }
 
-function openModel(title, desc) {
-    hideAllSections();
-    modal.showModal();
-    document.body.style.overflow = "hidden";
-    titleEl.textContent = title;
-    descEl.textContent = desc;
+function hadnleRenderingApplicationData(applicationData, action) {
+    if (action === 'view') {
+        renderApplicationDetails(applicationData);
+    } else {
+        renderApplicationFormData(applicationData);
+    }
 }
 
-async function fetchApplicationData() {
+function renderApplicationDetails(applicationData) {
+    console.log(applicationData);
+}
+
+function renderApplicationFormData(applicationData) {
+    console.log(applicationData);
+}
+
+async function fetchApplicationData(id) {
+    // 'https://catfact.ninja/fact' 
     try {
-        const res = fetchData('https://catfact.ninja/fact');
+        const res = fetchDataTest(id);
         return await res.json();
     } catch (err) {
         console.error("Error fetching applicatio data: ", err);
     }
 }
 
+// Open Model and perform all actions related to it regardless of the target or action
+function openModel(title, desc, target) {
+    hideAllSections();
+    modal.showModal();
+    document.body.style.overflow = "hidden";
+    titleEl.textContent = title;
+    descEl.textContent = desc;
+    sections[target].hidden = false;
+}
+
+// close model
 function close() {
     modal.close();
     document.body.style.overflow = "";
     form?.reset();
+    loaderEl.hidden = false;
 }
 
+// handle submission of the application form 
 function handleSubmit() {
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     console.log("Form data:", data);
 
