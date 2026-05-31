@@ -1,8 +1,8 @@
 import './style.css';
-// import { supabase } from './supabase';
 import { initJobModal } from './components/ApplicationModal';
 import { fetchData, getStorage, setStorage, loadSvgIcons } from './utils';
 import { initDropDown } from './components/DropDown';
+import { initApplications } from './components/applicationsRender';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const authorEl = document.querySelector("#author-el");
@@ -14,6 +14,9 @@ const FALLBACK_QUOTE = {
 
 
 async function init() {
+
+    // Initialize applications rendering logic 
+    initApplications();
 
     // Initialize modal logic
     initJobModal();

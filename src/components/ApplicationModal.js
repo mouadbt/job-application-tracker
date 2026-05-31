@@ -54,18 +54,18 @@ export function initJobModal() {
 }
 
 async function open(target, action, title, desc, id = null) {
-    openModel(title, desc, target);
+    openModal(title, desc, target);
     if (action === 'new') loaderEl.hidden = true;
     let applicationData = {};
-    if (action != 'new') {
+    if (action !== 'new') {
         applicationData = await fetchApplicationData(id);
     }
     if (applicationData) {
-        hadnleRenderingApplicationData(applicationData, action);
+        handleRenderingApplicationData(applicationData, action);
     }
 }
 
-function hadnleRenderingApplicationData(applicationData, action) {
+function handleRenderingApplicationData(applicationData, action) {
     if (action === 'view') {
         renderApplicationDetails(applicationData);
     } else {
@@ -84,15 +84,15 @@ function renderApplicationFormData(applicationData) {
 async function fetchApplicationData(id) {
     // 'https://catfact.ninja/fact' 
     try {
-        const res = fetchDataTest(id);
+        const res = await fetchDataTest(id);
         return await res.json();
     } catch (err) {
         console.error("Error fetching applicatio data: ", err);
     }
 }
 
-// Open Model and perform all actions related to it regardless of the target or action
-function openModel(title, desc, target) {
+// Open modal and perform all actions related to it regardless of the target or action
+function openModal(title, desc, target) {
     hideAllSections();
     modal.showModal();
     document.body.style.overflow = "hidden";
@@ -101,7 +101,7 @@ function openModel(title, desc, target) {
     sections[target].hidden = false;
 }
 
-// close model
+// close modal
 function close() {
     modal.close();
     document.body.style.overflow = "";
