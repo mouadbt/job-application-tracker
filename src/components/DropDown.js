@@ -1,22 +1,22 @@
-const actionsBtns = document.querySelectorAll('.actions-btn');
-const actionsDropDownEls = document.querySelectorAll('.actions-dropdown');
+const tableBody = document.querySelector('#applications-tbody');
 export function initDropDown() {
-    actionsBtns.forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
+    tableBody.addEventListener('click', (e) => {
+        const btn = e.target.closest('.actions-btn');
+        if (!btn) return;
 
-            const dropdownEl = btn.nextElementSibling;
-            if (!dropdownEl) return;
-            const isHidden = dropdownEl.hidden;
+        e.stopPropagation();
 
-            actionsDropDownEls.forEach(el => el.hidden = true);
+        const dropdownEl = btn.nextElementSibling;
+        if (!dropdownEl) return;
+        const isHidden = dropdownEl.hidden;
 
-            dropdownEl.hidden = !isHidden;
-        });
-
+        closeAllDropdowns();
+        dropdownEl.hidden = !isHidden;
     });
 
-    document.addEventListener("click", () => {
-        actionsDropDownEls.forEach(el => el.hidden = true);
-    });
+    document.addEventListener('click', closeAllDropdowns);
+}
+
+function closeAllDropdowns() {
+    document.querySelectorAll('.actions-dropdown').forEach(el => el.hidden = true);
 }

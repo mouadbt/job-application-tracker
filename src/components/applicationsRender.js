@@ -1,6 +1,5 @@
 import { supabase } from '../supabase';
 
-let applicationsRows = [];
 const tableBody = document.querySelector("#applications-tbody");
 
 export async function initApplications() {
@@ -8,14 +7,13 @@ export async function initApplications() {
         const rows = await fetchApplications();
         renderApplications(rows);
     } catch (error) {
-        console.log("Error fetching job applications: ", error);
+        console.error("Error fetching job applications: ", error);
     }
 };
 
 async function fetchApplications() {
     const { data, error } = await supabase.from('applications').select('*');
     if (error) throw error;
-    console.log(data);
     return data;
 }
 
@@ -89,27 +87,30 @@ function renderApplications(rows) {
         actionsBtn.dataset.target = 'more-vertical';
 
         const dropdown = document.createElement('div');
-        dropdown.className = 'actions-dropdown fixed mt-1 right-8! rounded-3xl bg-background p-1 flex flex-col border border-border';
+        dropdown.className = 'actions-dropdown fixed mt-1 right-8! rounded-3xl bg-background p-1 flex flex-col border border-border z-50';
         dropdown.dataset.id = row.id;
         dropdown.hidden = true;
 
         const viewBtn = document.createElement('button');
-        viewBtn.className = 'btn-ghost svg-wrapper edit-application';
+        viewBtn.className = 'btn-ghost svg-wrapper view-application';
         viewBtn.dataset.target = 'eye';
         viewBtn.dataset.id = row.id;
         viewBtn.textContent = 'View';
+        viewBtn.dataset.action='view';
 
         const editBtn = document.createElement('button');
         editBtn.className = 'btn-ghost svg-wrapper edit-application';
         editBtn.dataset.target = 'pen';
         editBtn.dataset.id = row.id;
         editBtn.textContent = 'Edit';
+        viewBtn.dataset.action='edit';
 
         const deleteBtn = document.createElement('button');
         deleteBtn.className = 'btn-ghost svg-wrapper';
         deleteBtn.dataset.target = 'trash';
         deleteBtn.dataset.id = row.id;
         deleteBtn.textContent = 'Delete';
+        viewBtn.dataset.action='delete';
 
         dropdown.append(viewBtn, editBtn, deleteBtn);
         actionsTd.append(actionsBtn, dropdown);

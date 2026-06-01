@@ -16,7 +16,7 @@ const FALLBACK_QUOTE = {
 async function init() {
 
     // Initialize applications rendering logic 
-    initApplications();
+   await initApplications();
 
     // Initialize modal logic
     initJobModal();
@@ -28,7 +28,7 @@ async function init() {
     loadSvgIcons();
 
     // Render random Quote
-    await renderDailyQuote();
+    renderDailyQuote();
 
 }
 
